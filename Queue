@@ -1,0 +1,54 @@
+class QueueMain {
+	private int top;
+	private int rear;
+	private int queue[];
+
+	public QueueMain(int size) {
+		queue = new int[size];
+		top = -1;
+		rear = -1;
+	}
+
+	public void enqueue(int val) {
+		rear++;
+		queue[rear] = val;
+		System.out.println("Value inserted" + queue[rear]);
+	}
+
+	public void dequeue() {
+		top++;
+		System.out.println(queue[top]);
+	}
+
+	public void peek() {
+		System.out.println(queue[rear]);
+	}
+
+	public boolean isFull() {
+		return top == rear;
+	}
+
+	public boolean isEmpty() {
+		return rear == queue.length - 1;
+	}
+}
+
+class Queue {
+	public static void main(String[] args) {
+		int arr [ ] = new int [1];
+		//arr[0]=10;
+		arr[1]=20;
+		System.out.println(" "+arr[1]);
+//		QueueMain q = new QueueMain(5);
+//		q.enqueue(10);
+//		q.enqueue(20);
+//		q.enqueue(30);
+//		q.enqueue(40);
+//		q.dequeue();
+//		q.peek();
+//		q.dequeue();
+//		q.dequeue();
+//		q.peek();
+
+	}
+}
