@@ -1,0 +1,182 @@
+import java.util.Scanner;
+
+class LinkedList {
+	static class Node {
+		private String data;
+		private Node next;
+
+		Node(String data) {
+			this.data = data;
+			this.next = null;
+		}
+	}
+
+	private Node head;
+
+	public LinkedList() {
+		head = null;
+	}
+
+	public void addFirst(String name) {
+		Node newNode = new Node(name);
+
+		if (head == null) {
+			head = newNode;
+			System.out.println("Venue is Booked :" + name);
+		} else {
+			newNode.next = head;
+			head = newNode;
+			System.out.println("Venue is Booked  :" + " " + name);
+		}
+
+	}
+
+	public void addLast(String name) {
+		Node newNode = new Node(name);
+		if (head == null) {
+			head = newNode;
+		} else {
+			Node trav = head;
+			while (trav.next != null) {
+				trav = trav.next;
+				trav.next = newNode;
+			}
+		}
+	}
+
+	public void addAtPos(int pos, String name) {
+		Node newNode = new Node(name);
+		if (pos < 1) {
+			System.out.println("Invalid position");
+		}
+		if (head == null || pos == 1) {
+			addFirst(name);
+		} else {
+			Node trav = head;
+			for (int i = 1; i < pos - 1; i++) {
+				trav = trav.next;
+				if (trav == null) {
+					System.out.println("Invalid position" + pos);
+				}
+
+			}
+			trav.next = newNode;
+			newNode.next = trav.next;
+		}
+	}
+
+	public void delFirst() {
+		if (head == null) {
+			System.out.println("List is Empty Bro add some");
+		} else {
+			head = head.next;
+		}
+	}
+
+	public void delLast() {
+		Node trav = head, temp = null;
+		while (trav.next != null) {
+			temp = trav;
+			trav = trav.next;
+		}
+		temp.next = null;
+
+	}
+
+	public void delAtPos(int pos) {
+		if (pos < 1) {
+			System.out.println("Invalid position" + pos);
+		} else {
+			Node trav = head;
+			for (int i = 1; i < pos - 1; i++) {
+				trav = trav.next;
+			}
+			trav.next = trav.next.next;
+		}
+	}
+
+	public void display() {
+		if (head == null)
+			System.out.println("No Venue is Booked yet!!!!!!!!!!");
+		Node trav = head;
+		while (trav != null) {
+			System.out.println("Successfully booked :" + trav.data + " ");
+			trav = trav.next;
+
+		}
+	}
+
+	public void checkAvailability(String name) {
+		// if (head == null) {
+		// System.out.println("Ready to Book");
+		// } else {
+		Node trav = head;
+		while (trav != null) {
+			trav = trav.next;
+			if ((trav.data.compareTo(name)) == 0) {
+				System.out.println("Already Booked!!!!!");
+
+			} else {
+				System.out.println("Ready to Book");
+			}
+			trav = trav.next;
+		}
+	}
+}
+
+public class SinglyLinkedList {
+	public static void main(String[] args) {
+		LinkedList ll = new LinkedList();
+		Scanner sc = new Scanner(System.in);
+		int choice, pos;
+		String Name;
+		System.out.println("Enter your Choice");
+
+		do {
+			System.out.print(
+					"\n\n0. Exit\n1. Add First\n2. Add Last\n3. Add At Pos\n4. Display\n5. Check Availibility\n6. Del Last\n7. Del At Pos\n8. Del All \n9. Del First\nEnter choice: ");
+			System.out.println("");
+			choice = sc.nextInt();
+			switch (choice) {
+			case 1:
+				System.out.println("Enter element :");
+				Name = sc.next();
+				ll.addFirst(Name);
+				break;
+			case 2:
+				System.out.println("Enter element to add at last :");
+				Name = sc.next();
+				ll.addLast(Name);
+				break;
+			case 3:
+				System.out.println("Enter element at position:");
+				Name = sc.next();
+				System.out.println("Enter position");
+				pos = sc.nextInt();
+				ll.addAtPos(pos, Name);
+				break;
+			case 4:
+				ll.display();
+				break;
+			case 5:
+				System.out.println("Enter element :");
+				Name = sc.next();
+				ll.checkAvailability(Name);
+				break;
+			case 6:
+				ll.delLast();
+				break;
+			case 7:
+				System.out.println("Enter position to delete");
+				pos = sc.nextInt();
+				ll.delAtPos(pos);
+
+			case 9:
+				ll.delFirst();
+				break;
+			}
+		} while (choice != 0);
+
+	}
+
+}
